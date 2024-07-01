@@ -104,6 +104,7 @@ vim.o.listchars = "tab:→→,space:∙"
 vim.cmd([[autocmd BufEnter * set formatoptions-=r]]) -- disable auto comment in newline
 vim.o.foldmethod="indent"
 vim.o.foldenable=false
+vim.o.foldnestmax=1
 
 -- colorscheme
 vim.cmd.colorscheme("habamax")
