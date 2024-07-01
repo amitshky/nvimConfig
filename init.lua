@@ -147,8 +147,15 @@ vim.keymap.set('n', '<', '<<');
 vim.keymap.set('v', '<', '<gv');
 vim.keymap.set('v', '>', '>gv');
 
+-- buffers
+vim.keymap.set('n', '<S-h>', ':bp<cr>') -- prev buffer
+vim.keymap.set('n', '<S-l>', ':bp<cr>') -- next buffer
+
 -- leader key keymaps
 vim.keymap.set('n', '<leader>h', ':nohl<cr>') -- remove search highlights
+-- comment
+vim.keymap.set('n', '<leader>/', '<Plug>(comment_toggle_linewise_current)') -- comment line
+vim.keymap.set('v', '<leader>/', '<Plug>(comment_toggle_linewise_visual)') -- comment line in visual mode
 -- split window
 vim.keymap.set('n', '<leader>\\\\', '<C-w>v') -- split vertically
 vim.keymap.set('n', '<leader>\\|', '<C-w>s') -- split horizontally
@@ -156,7 +163,3 @@ vim.keymap.set('n', '<C-j>', '<C-w>j')
 vim.keymap.set('n', '<C-k>', '<C-w>k')
 vim.keymap.set('n', '<C-h>', '<C-w>h')
 vim.keymap.set('n', '<C-l>', '<C-w>l')
-
--- buffers
-vim.keymap.set('n', '<S-h>', ':bp<cr>') -- prev buffer
-vim.keymap.set('n', '<S-l>', ':bp<cr>') -- next buffer
