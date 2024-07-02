@@ -12,49 +12,16 @@ end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
 -- [[ Configure and install plugins ]]
---
---  To check the current status of your plugins, run
---    :Lazy
---
---  You can press `?` in this menu for help. Use `:q` to close the window
---
---  To update plugins you can run
---    :Lazy update
---
--- NOTE: Here is where you install your plugins.
 require('lazy').setup({
 	-- automatically check for plugin updates
 	checker = { enabled = true },
-	-- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
-	'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
 
-	-- NOTE: Plugins can also be added by using a table,
-	-- with the first argument being the link and the following
-	-- keys can be used to configure plugin behavior/loading/etc.
-	--
-	-- Use `opts = {}` to force a plugin to be loaded.
-	--
-	--  This is equivalent to:
-	--    require('Comment').setup({})
+	'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
 
 	-- "gc" to comment visual regions/lines
 	{ 'numToStr/Comment.nvim', opts = {} },
 
--- NOTE: Plugins can also be configured to run Lua code when they are loaded.
-
---   This is often very useful to both group configuration, as well as handle
---   lazy loading plugins that don't need to be loaded immediately at startup.
-
---   For example, in the following configuration, we use:
---    event = 'VimEnter'
-
---   which loads which-key before all the UI elements are loaded. Events can be
---   normal autocommands events (`:help autocmd-events`).
-
---   Then, because we use the `config` key, the configuration only runs
---   after the plugin has been loaded:
---    config = function() ... end
-
+	-- which key
   { -- Useful plugin to show you pending keybinds.
     'folke/which-key.nvim',
     event = 'VimEnter', -- Sets the loading event to 'VimEnter'
@@ -78,6 +45,15 @@ require('lazy').setup({
     end,
   },
 
+	-- -- lualine
+ --  {
+ --    "nvim-lualine/lualine.nvim",
+ --    config = function()
+ --      require("lualine").setup()
+ --    end,
+ --    event = "VimEnter",
+ --  },
+	{ "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} }
 })
 
 
@@ -142,10 +118,10 @@ vim.keymap.set('v', '<A-j>', ":m '>+1<cr>gv-gv")
 vim.keymap.set('v', '<A-k>', ":m '<-2<cr>gv-gv")
 
 -- indentation
-vim.keymap.set('n', '>', '>>');
-vim.keymap.set('n', '<', '<<');
-vim.keymap.set('v', '<', '<gv');
-vim.keymap.set('v', '>', '>gv');
+vim.keymap.set('n', '>', '>>')
+vim.keymap.set('n', '<', '<<')
+vim.keymap.set('v', '<', '<gv')
+vim.keymap.set('v', '>', '>gv')
 
 -- buffers
 vim.keymap.set('n', '<S-h>', ':bp<cr>') -- prev buffer
