@@ -33,6 +33,7 @@ require('lazy').setup({
     lazy = true,
     cmd = "Telescope",
   },
+
   -- which key
   { -- Useful plugin to show you pending keybinds.
     'folke/which-key.nvim',
@@ -42,13 +43,8 @@ require('lazy').setup({
 
       -- Document existing key chains
       require('which-key').register {
-        -- ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
-        -- ['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
-        -- ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
-        -- ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
-        -- ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
-        -- ['<leader>t'] = { name = '[T]oggle', _ = 'which_key_ignore' },
-        -- ['<leader>h'] = { name = 'Git [H]unk', _ = 'which_key_ignore' },
+        ['<leader>f'] = { name = 'Telescope', _ = 'which_key_ignore' },
+        ['<leader>\\'] = { name = 'Split window', _ = 'which_key_ignore' },
       }
       -- visual mode
       require('which-key').register({
@@ -56,37 +52,65 @@ require('lazy').setup({
       }, { mode = 'v' })
     end,
   },
-  -- Terminal
-  {'akinsho/toggleterm.nvim', version = "*", config = true},
-  -- {
-  --   "akinsho/toggleterm.nvim",
-  --   branch = "main",
-  --   init = function()
-  --     require("terminal").init()
-  --   end,
-  --   config = function()
-  --     require("terminal").setup()
-  --   end,
-  --   cmd = {
-  --     "ToggleTerm",
-  --     "TermExec",
-  --     "ToggleTermToggleAll",
-  --     "ToggleTermSendCurrentLine",
-  --     "ToggleTermSendVisualLines",
-  --     "ToggleTermSendVisualSelection",
-  --   },
-  --   -- keys = terminal.open_mapping,
-  -- },
- -- -- lualine
- --  {
- --    "nvim-lualine/lualine.nvim",
- --    config = function()
- --      require("lualine").setup()
- --    end,
- --    event = "VimEnter",
- --  },
 
-  { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} }
+  -- cmp
+  {
+    "hrsh7th/nvim-cmp",
+    config = function()
+      require("cmp").setup()
+    end,
+    event = { "InsertEnter", "CmdlineEnter" },
+    dependencies = {
+      "cmp-nvim-lsp",
+      "cmp_luasnip",
+      "cmp-buffer",
+      "cmp-path",
+      "cmp-cmdline",
+    },
+  },
+  { "hrsh7th/cmp-nvim-lsp", lazy = true },
+  { "saadparwaiz1/cmp_luasnip", lazy = true },
+  { "hrsh7th/cmp-buffer", lazy = true },
+  { "hrsh7th/cmp-path", lazy = true },
+  { "hrsh7th/cmp-cmdline", lazy = true },
+
+  -- Terminal
+  {'akinsho/toggleterm.nvim', version = "v1.*", config = true},
+
+  { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
+ 
+  -- bufferline
+  {
+    'akinsho/bufferline.nvim', 
+    config = function()
+      require("bufferline").setup({
+        options = {
+          close_icon = '',
+          buffer_close_icon = '',
+        },
+      })
+    end,
+    version = "v1.*"
+  },
+
+  -- lualine
+  {
+    -- "hoob3rt/lualine.nvim",
+    "nvim-lualine/lualine.nvim",
+    -- "Lunarvim/lualine.nvim",
+    config = function()
+      require("lualine").setup({
+        options = {
+          icons_enabled = false,
+          theme = 'jellybeans',
+        },
+        sections = {
+          lualine_b = { 'branch' },
+        },
+      })
+    end,
+    event = "VimEnter",
+  },
 })
 
 
@@ -163,13 +187,13 @@ vim.keymap.set('n', '<S-h>', ':bp<cr>') -- prev buffer
 vim.keymap.set('n', '<S-l>', ':bp<cr>') -- next buffer
 
 -- leader key keymaps
-vim.keymap.set('n', '<leader>h', ':nohl<cr>') -- remove search highlights
+vim.keymap.set('n', '<leader>h', ':nohl<cr>', { desc = "Remove search highlights" }) -- remove search highlights
 -- comment
 -- vim.keymap.set('n', '<leader>/', '<Plug>(comment_toggle_linewise_current)') -- comment line
 -- vim.keymap.set('v', '<leader>/', '<Plug>(comment_toggle_linewise_visual)') -- comment line in visual mode
 -- split window
-vim.keymap.set('n', '<leader>\\\\', '<C-w>v') -- split vertically
-vim.keymap.set('n', '<leader>\\|', '<C-w>s') -- split horizontally
+vim.keymap.set('n', '<leader>\\\\', '<C-w>v', { desc = "Vertically" }) -- split vertically
+vim.keymap.set('n', '<leader>\\|', '<C-w>s', { desc = "Horizontally" }) -- split horizontally
 vim.keymap.set('n', '<C-j>', '<C-w>j')
 vim.keymap.set('n', '<C-k>', '<C-w>k')
 vim.keymap.set('n', '<C-h>', '<C-w>h')
