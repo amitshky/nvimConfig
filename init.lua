@@ -13,15 +13,15 @@ vim.opt.rtp:prepend(lazypath)
 
 -- [[ Configure and install plugins ]]
 require('lazy').setup({
-	-- automatically check for plugin updates
-	checker = { enabled = true },
+  -- automatically check for plugin updates
+  checker = { enabled = true },
 
-	'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
+  'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
 
-	-- "gc" to comment visual regions/lines
-	{ 'numToStr/Comment.nvim', opts = {} },
+  -- "gc" to comment visual regions/lines
+  { 'numToStr/Comment.nvim', opts = {} },
 
-	-- which key
+  -- which key
   { -- Useful plugin to show you pending keybinds.
     'folke/which-key.nvim',
     event = 'VimEnter', -- Sets the loading event to 'VimEnter'
@@ -44,8 +44,7 @@ require('lazy').setup({
       }, { mode = 'v' })
     end,
   },
-
-	-- -- lualine
+ -- -- lualine
  --  {
  --    "nvim-lualine/lualine.nvim",
  --    config = function()
@@ -53,7 +52,8 @@ require('lazy').setup({
  --    end,
  --    event = "VimEnter",
  --  },
-	{ "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} }
+
+  { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} }
 })
 
 
@@ -130,8 +130,8 @@ vim.keymap.set('n', '<S-l>', ':bp<cr>') -- next buffer
 -- leader key keymaps
 vim.keymap.set('n', '<leader>h', ':nohl<cr>') -- remove search highlights
 -- comment
-vim.keymap.set('n', '<leader>/', '<Plug>(comment_toggle_linewise_current)') -- comment line
-vim.keymap.set('v', '<leader>/', '<Plug>(comment_toggle_linewise_visual)') -- comment line in visual mode
+-- vim.keymap.set('n', '<leader>/', '<Plug>(comment_toggle_linewise_current)') -- comment line
+-- vim.keymap.set('v', '<leader>/', '<Plug>(comment_toggle_linewise_visual)') -- comment line in visual mode
 -- split window
 vim.keymap.set('n', '<leader>\\\\', '<C-w>v') -- split vertically
 vim.keymap.set('n', '<leader>\\|', '<C-w>s') -- split horizontally
@@ -139,3 +139,8 @@ vim.keymap.set('n', '<C-j>', '<C-w>j')
 vim.keymap.set('n', '<C-k>', '<C-w>k')
 vim.keymap.set('n', '<C-h>', '<C-w>h')
 vim.keymap.set('n', '<C-l>', '<C-w>l')
+-- resize window
+vim.keymap.set('n', '<C-Up>', ':resize -2<CR>')
+vim.keymap.set('n', '<C-Down>', ':resize +2<CR>')
+vim.keymap.set('n', '<C-Left>', ':vertical resize -2<CR>')
+vim.keymap.set('n', '<C-Right>', ':vertical resize +2<CR>')
