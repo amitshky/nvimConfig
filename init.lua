@@ -56,6 +56,27 @@ require('lazy').setup({
       }, { mode = 'v' })
     end,
   },
+  -- Terminal
+  {'akinsho/toggleterm.nvim', version = "*", config = true},
+  -- {
+  --   "akinsho/toggleterm.nvim",
+  --   branch = "main",
+  --   init = function()
+  --     require("terminal").init()
+  --   end,
+  --   config = function()
+  --     require("terminal").setup()
+  --   end,
+  --   cmd = {
+  --     "ToggleTerm",
+  --     "TermExec",
+  --     "ToggleTermToggleAll",
+  --     "ToggleTermSendCurrentLine",
+  --     "ToggleTermSendVisualLines",
+  --     "ToggleTermSendVisualSelection",
+  --   },
+  --   -- keys = terminal.open_mapping,
+  -- },
  -- -- lualine
  --  {
  --    "nvim-lualine/lualine.nvim",
