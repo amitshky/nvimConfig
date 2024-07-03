@@ -21,6 +21,18 @@ require('lazy').setup({
   -- "gc" to comment visual regions/lines
   { 'numToStr/Comment.nvim', opts = {} },
 
+  -- Telescope
+  { "nvim-telescope/telescope-fzf-native.nvim", build = "make", lazy = true },
+  {
+    "nvim-telescope/telescope.nvim",
+    branch = "0.1.x",
+    config = function()
+      require("telescope").setup()
+    end,
+    dependencies = { "telescope-fzf-native.nvim" },
+    lazy = true,
+    cmd = "Telescope",
+  },
   -- which key
   { -- Useful plugin to show you pending keybinds.
     'folke/which-key.nvim',
@@ -81,6 +93,8 @@ vim.cmd([[autocmd BufEnter * set formatoptions-=r]]) -- disable auto comment in 
 vim.o.foldmethod="indent"
 vim.o.foldenable=false
 vim.o.foldnestmax=1
+vim.o.splitbelow=true
+vim.o.splitright=true
 
 -- colorscheme
 vim.cmd.colorscheme("habamax")
@@ -144,3 +158,10 @@ vim.keymap.set('n', '<C-Up>', ':resize -2<CR>')
 vim.keymap.set('n', '<C-Down>', ':resize +2<CR>')
 vim.keymap.set('n', '<C-Left>', ':vertical resize -2<CR>')
 vim.keymap.set('n', '<C-Right>', ':vertical resize +2<CR>')
+-- telescope
+vim.keymap.set('n', '<leader>ff', require('telescope.builtin').find_files, { desc = "Find files" })
+vim.keymap.set('n', '<leader>fg', require('telescope.builtin').live_grep, { desc = "Live grep" })
+vim.keymap.set('n', '<leader>fs', require('telescope.builtin').grep_string, { desc = "Grep string under the cursor or selection" })
+vim.keymap.set('n', '<leader>fG', require('telescope.builtin').git_files, { desc = "Git files" })
+vim.keymap.set('n', '<leader>fb', require('telescope.builtin').buffers, { desc = "Buffers" })
+vim.keymap.set('n', '<leader>fh', require('telescope.builtin').help_tags, { desc = "Help tags" })
