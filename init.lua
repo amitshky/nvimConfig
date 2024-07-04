@@ -18,11 +18,7 @@ require('lazy').setup({
 
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
 
-  -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim', opts = {} },
-
   -- Telescope
-  { "nvim-telescope/telescope-fzf-native.nvim", build = "make", lazy = true },
   {
     "nvim-telescope/telescope.nvim",
     branch = "0.1.x",
@@ -33,6 +29,7 @@ require('lazy').setup({
     lazy = true,
     cmd = "Telescope",
   },
+  { "nvim-telescope/telescope-fzf-native.nvim", build = "make", lazy = true },
 
   -- which key
   { -- Useful plugin to show you pending keybinds.
@@ -40,24 +37,29 @@ require('lazy').setup({
     event = 'VimEnter', -- Sets the loading event to 'VimEnter'
     config = function() -- This is the function that runs, AFTER loading
       require('which-key').setup()
-
-      -- Document existing key chains
-      require('which-key').register {
-        ['<leader>f'] = { name = 'Telescope', _ = 'which_key_ignore' },
-        ['<leader>\\'] = { name = 'Split window', _ = 'which_key_ignore' },
-      }
-      -- visual mode
-      require('which-key').register({
-        -- ['<leader>h'] = { 'Git [H]unk' },
-      }, { mode = 'v' })
     end,
   },
 
   -- cmp
-  {
+    {
     "hrsh7th/nvim-cmp",
     config = function()
-      require("cmp").setup()
+      require("cmp").setup({
+        snippet = {
+          -- REQUIRED - you must specify a snippet engine
+          expand = function(args)
+            -- vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+            require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+            -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
+            -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+            -- vim.snippet.expand(args.body) -- For native neovim snippets (Neovim v0.10+)
+          end,
+        },
+        window = {
+          -- completion = cmp.config.window.bordered(),
+          -- documentation = cmp.config.window.bordered(),
+        },
+      })
     end,
     event = { "InsertEnter", "CmdlineEnter" },
     dependencies = {
@@ -75,22 +77,33 @@ require('lazy').setup({
   { "hrsh7th/cmp-cmdline", lazy = true },
 
   -- Terminal
-  {'akinsho/toggleterm.nvim', version = "v1.*", config = true},
+  {
+    'akinsho/toggleterm.nvim',
+    version = "*",
+    config = function()
+      require('toggleterm').setup()
+    end,
+  },
 
+  -- lines in indentations
   { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
- 
+
+  -- "gc" to comment visual regions/lines
+  { 'numToStr/Comment.nvim', opts = {} },
+
   -- bufferline
   {
     'akinsho/bufferline.nvim', 
     config = function()
       require("bufferline").setup({
         options = {
-          close_icon = '',
-          buffer_close_icon = '',
+          separator_style = "slant", -- "slant" | "slope" | "thick" | "thin" | { 'any', 'any' },
+          show_close_icon = false,
+          show_buffer_close_icons = false,
         },
       })
     end,
-    version = "v1.*"
+    version = "*"
   },
 
   -- lualine
@@ -184,9 +197,25 @@ vim.keymap.set('v', '>', '>gv')
 
 -- buffers
 vim.keymap.set('n', '<S-h>', ':bp<cr>') -- prev buffer
-vim.keymap.set('n', '<S-l>', ':bp<cr>') -- next buffer
+vim.keymap.set('n', '<S-l>', ':bn<cr>') -- next buffer
+
+-- tabs
+vim.keymap.set('n', '<M-h>', ':tabprevious<cr>')
+vim.keymap.set('n', '<M-l>', ':tabNext<cr>')
 
 -- leader key keymaps
+-- which key register
+-- Document existing key chains
+require('which-key').register {
+  ['<leader>f'] = { name = 'Telescope', _ = 'which_key_ignore' },
+  ['<leader>\\'] = { name = 'Split window', _ = 'which_key_ignore' },
+  ['<leader>t'] = { name = 'Toggle term', _ = 'which_key_ignore' },
+}
+-- visual mode
+require('which-key').register({
+  -- ['<leader>h'] = { 'Git [H]unk' },
+}, { mode = 'v' })
+
 vim.keymap.set('n', '<leader>h', ':nohl<cr>', { desc = "Remove search highlights" }) -- remove search highlights
 -- comment
 -- vim.keymap.set('n', '<leader>/', '<Plug>(comment_toggle_linewise_current)') -- comment line
@@ -204,9 +233,24 @@ vim.keymap.set('n', '<C-Down>', ':resize +2<CR>')
 vim.keymap.set('n', '<C-Left>', ':vertical resize -2<CR>')
 vim.keymap.set('n', '<C-Right>', ':vertical resize +2<CR>')
 -- telescope
+require('telescope').setup({
+  defaults = {
+    mappings = {
+      i = {
+        ["<esc>"] = require('telescope.actions').close, -- Esc to close telescope in insert mode
+      },
+    }
+  }
+})
 vim.keymap.set('n', '<leader>ff', require('telescope.builtin').find_files, { desc = "Find files" })
 vim.keymap.set('n', '<leader>fg', require('telescope.builtin').live_grep, { desc = "Live grep" })
 vim.keymap.set('n', '<leader>fs', require('telescope.builtin').grep_string, { desc = "Grep string under the cursor or selection" })
+vim.keymap.set('n', '<leader>fc', require('telescope.builtin').current_buffer_fuzzy_find, { desc = "Fuzzy find in current buffer" })
 vim.keymap.set('n', '<leader>fG', require('telescope.builtin').git_files, { desc = "Git files" })
 vim.keymap.set('n', '<leader>fb', require('telescope.builtin').buffers, { desc = "Buffers" })
 vim.keymap.set('n', '<leader>fh', require('telescope.builtin').help_tags, { desc = "Help tags" })
+-- toggleterm
+vim.keymap.set('n', '<leader>tt', ':ToggleTerm direction=float<cr>')
+vim.keymap.set('n', '<leader>tj', ':ToggleTerm direction=horizontal<cr>')
+vim.keymap.set('n', '<leader>tl', ':ToggleTerm direction=vertical<cr>')
+vim.keymap.set('n', '<leader>tk', ':ToggleTerm direction=tab<cr>')
