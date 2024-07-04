@@ -40,9 +40,6 @@ require('lazy').setup({
             },
           }
         },
-        git = {
-          enable = false,
-        },
       })
     end,
   },
