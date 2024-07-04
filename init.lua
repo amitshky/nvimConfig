@@ -250,7 +250,7 @@ vim.keymap.set('n', '<leader>fG', require('telescope.builtin').git_files, { desc
 vim.keymap.set('n', '<leader>fb', require('telescope.builtin').buffers, { desc = "Buffers" })
 vim.keymap.set('n', '<leader>fh', require('telescope.builtin').help_tags, { desc = "Help tags" })
 -- toggleterm
-vim.keymap.set('n', '<leader>tt', ':ToggleTerm direction=float<cr>')
+vim.keymap.set('n', '<leader>tt', ':ToggleTerm direction=tab<cr>')
 vim.keymap.set('n', '<leader>tj', ':ToggleTerm direction=horizontal<cr>')
 vim.keymap.set('n', '<leader>tl', ':ToggleTerm direction=vertical<cr>')
-vim.keymap.set('n', '<leader>tk', ':ToggleTerm direction=tab<cr>')
+vim.keymap.set('n', '<leader>tk', ':ToggleTerm direction=float<cr>')
