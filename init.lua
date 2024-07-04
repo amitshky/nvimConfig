@@ -1,6 +1,7 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
-
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
 
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
@@ -18,6 +19,18 @@ require('lazy').setup({
 
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
 
+  -- NvimTree
+  {
+    "nvim-tree/nvim-tree.lua",
+    version = "*",
+    lazy = false,
+    dependencies = {
+      -- "nvim-tree/nvim-web-devicons",
+    },
+    config = function()
+      require("nvim-tree").setup({})
+    end,
+  },
   -- Telescope
   {
     "nvim-telescope/telescope.nvim",
@@ -103,7 +116,8 @@ require('lazy').setup({
         },
       })
     end,
-    version = "*"
+    version = "*",
+    event = "BufReadPre",
   },
 
   -- lualine
@@ -232,6 +246,8 @@ vim.keymap.set('n', '<C-Up>', ':resize -2<CR>')
 vim.keymap.set('n', '<C-Down>', ':resize +2<CR>')
 vim.keymap.set('n', '<C-Left>', ':vertical resize -2<CR>')
 vim.keymap.set('n', '<C-Right>', ':vertical resize +2<CR>')
+-- NvimTree
+vim.keymap.set('n', '<leader>e', ':NvimTreeToggle<cr>', { desc = "Toggle NvimTree" })
 -- telescope
 require('telescope').setup({
   defaults = {
