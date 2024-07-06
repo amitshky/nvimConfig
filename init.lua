@@ -1,5 +1,7 @@
+-- map `space` key as leader key
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
+-- disable netrw for NvimTree
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
@@ -43,6 +45,7 @@ require('lazy').setup({
       })
     end,
   },
+
   -- Telescope
   {
     "nvim-telescope/telescope.nvim",
@@ -65,41 +68,41 @@ require('lazy').setup({
     end,
   },
 
-  -- cmp
-    {
-    "hrsh7th/nvim-cmp",
-    config = function()
-      require("cmp").setup({
-        snippet = {
-          -- REQUIRED - you must specify a snippet engine
-          expand = function(args)
-            -- vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
-            require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
-            -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
-            -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
-            -- vim.snippet.expand(args.body) -- For native neovim snippets (Neovim v0.10+)
-          end,
-        },
-        window = {
-          -- completion = cmp.config.window.bordered(),
-          -- documentation = cmp.config.window.bordered(),
-        },
-      })
-    end,
-    event = { "InsertEnter", "CmdlineEnter" },
-    dependencies = {
-      "cmp-nvim-lsp",
-      "cmp_luasnip",
-      "cmp-buffer",
-      "cmp-path",
-      "cmp-cmdline",
-    },
-  },
-  { "hrsh7th/cmp-nvim-lsp", lazy = true },
-  { "saadparwaiz1/cmp_luasnip", lazy = true },
-  { "hrsh7th/cmp-buffer", lazy = true },
-  { "hrsh7th/cmp-path", lazy = true },
-  { "hrsh7th/cmp-cmdline", lazy = true },
+  -- -- cmp
+  --   {
+  --   "hrsh7th/nvim-cmp",
+  --   config = function()
+  --     require("cmp").setup({
+  --       snippet = {
+  --         -- REQUIRED - you must specify a snippet engine
+  --         expand = function(args)
+  --           -- vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+  --           require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+  --           -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
+  --           -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+  --           -- vim.snippet.expand(args.body) -- For native neovim snippets (Neovim v0.10+)
+  --         end,
+  --       },
+  --       window = {
+  --         -- completion = cmp.config.window.bordered(),
+  --         -- documentation = cmp.config.window.bordered(),
+  --       },
+  --     })
+  --   end,
+  --   event = { "InsertEnter", "CmdlineEnter" },
+  --   dependencies = {
+  --     "cmp-nvim-lsp",
+  --     "cmp_luasnip",
+  --     "cmp-buffer",
+  --     "cmp-path",
+  --     "cmp-cmdline",
+  --   },
+  -- },
+  -- { "hrsh7th/cmp-nvim-lsp", lazy = true },
+  -- { "saadparwaiz1/cmp_luasnip", lazy = true },
+  -- { "hrsh7th/cmp-buffer", lazy = true },
+  -- { "hrsh7th/cmp-path", lazy = true },
+  -- { "hrsh7th/cmp-cmdline", lazy = true },
 
   -- Terminal
   {
@@ -159,6 +162,7 @@ vim.o.relativenumber = true
 vim.o.cursorline = true
 vim.o.tabstop = 4
 vim.o.shiftwidth = 4
+vim.o.softtabstop = 4
 vim.o.expandtab = true
 vim.o.wrap = true
 vim.o.linebreak = true
@@ -176,7 +180,7 @@ vim.o.listchars = "tab:→→,space:∙"
 vim.cmd([[autocmd BufEnter * set formatoptions-=r]]) -- disable auto comment in newline
 vim.o.foldmethod="indent"
 vim.o.foldenable=false
-vim.o.foldnestmax=1
+vim.o.foldnestmax=4
 vim.o.splitbelow=true
 vim.o.splitright=true
 
@@ -187,6 +191,10 @@ vim.cmd.colorscheme("habamax")
 -- keymaps
 vim.keymap.set({ 'n', 'v' }, '<space>', '<nop>' )
 vim.keymap.set('i', 'jk', '<esc>')
+vim.keymap.set('n', '<leader>q', ':q<cr>', { desc = "Quit" })
+vim.keymap.set('n', '<leader>Q', ':qa<cr>', { desc = "Quit all" })
+vim.keymap.set('n', '<leader>w', ':w<cr>', { desc = "Save" })
+vim.keymap.set('n', '<leader>W', ':wa<cr>', { desc = "Save all" })
 vim.keymap.set('i', '<C-h>', '<C-w>')
 vim.keymap.set({ 'n', 'v' }, 'U', '<C-r>')
 vim.keymap.set({ 'n', 'v' }, '<C-r>', '<U>')
@@ -266,11 +274,12 @@ require('telescope').setup({
     mappings = {
       i = {
         ["<esc>"] = require('telescope.actions').close, -- Esc to close telescope in insert mode
+        ["<C-h>"] = function() vim.api.nvim_input("<C-w>") end, -- Ctrl + Backspace
       },
     }
   }
 })
-vim.keymap.set('n', '<leader>ff', require('telescope.builtin').find_files, { desc = "Find files" })
+vim.keymap.set('n', '<leader>ff', require('telescope.builtin').find_files({ hidden = true }), { desc = "Find files" })
 vim.keymap.set('n', '<leader>fg', require('telescope.builtin').live_grep, { desc = "Live grep" })
 vim.keymap.set('n', '<leader>fs', require('telescope.builtin').grep_string, { desc = "Grep string under the cursor or selection" })
 vim.keymap.set('n', '<leader>fc', require('telescope.builtin').current_buffer_fuzzy_find, { desc = "Fuzzy find in current buffer" })
