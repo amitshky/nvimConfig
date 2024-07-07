@@ -191,10 +191,10 @@ vim.cmd.colorscheme("habamax")
 -- keymaps
 vim.keymap.set({ 'n', 'v' }, '<space>', '<nop>' )
 vim.keymap.set('i', 'jk', '<esc>')
-vim.keymap.set('n', '<leader>q', ':q<cr>', { desc = "Quit" })
-vim.keymap.set('n', '<leader>Q', ':qa<cr>', { desc = "Quit all" })
-vim.keymap.set('n', '<leader>w', ':w<cr>', { desc = "Save" })
-vim.keymap.set('n', '<leader>W', ':wa<cr>', { desc = "Save all" })
+vim.keymap.set('n', '<leader>q', '<cmd>q<cr>', { desc = "Quit" })
+vim.keymap.set('n', '<leader>Q', '<cmd>qa<cr>', { desc = "Quit all" })
+vim.keymap.set('n', '<leader>w', '<cmd>w<cr>', { desc = "Save" })
+vim.keymap.set('n', '<leader>W', '<cmd>wa<cr>', { desc = "Save all" })
 vim.keymap.set('i', '<C-h>', '<C-w>')
 vim.keymap.set({ 'n', 'v' }, 'U', '<C-r>')
 vim.keymap.set({ 'n', 'v' }, '<C-r>', '<U>')
@@ -224,18 +224,18 @@ vim.keymap.set('v', '<A-j>', ":m '>+1<cr>gv-gv")
 vim.keymap.set('v', '<A-k>', ":m '<-2<cr>gv-gv")
 
 -- indentation
-vim.keymap.set('n', '>', '>>')
-vim.keymap.set('n', '<', '<<')
+-- vim.keymap.set('n', '>', '>>')
+-- vim.keymap.set('n', '<', '<<')
 vim.keymap.set('v', '<', '<gv')
 vim.keymap.set('v', '>', '>gv')
 
 -- buffers
-vim.keymap.set('n', '<S-h>', ':bp<cr>') -- prev buffer
-vim.keymap.set('n', '<S-l>', ':bn<cr>') -- next buffer
+vim.keymap.set('n', '<S-h>', '<cmd>bp<cr>') -- prev buffer
+vim.keymap.set('n', '<S-l>', '<cmd>bn<cr>') -- next buffer
 
 -- tabs
-vim.keymap.set('n', '<M-h>', ':tabprevious<cr>')
-vim.keymap.set('n', '<M-l>', ':tabNext<cr>')
+vim.keymap.set('n', '<M-h>', '<cmd>tabprevious<cr>')
+vim.keymap.set('n', '<M-l>', '<cmd>tabNext<cr>')
 
 -- leader key keymaps
 -- which key register
@@ -250,7 +250,7 @@ require('which-key').register({
   -- ['<leader>h'] = { 'Git [H]unk' },
 }, { mode = 'v' })
 
-vim.keymap.set('n', '<leader>h', ':nohl<cr>', { desc = "Remove search highlights" }) -- remove search highlights
+vim.keymap.set('n', '<leader>h', '<cmd>nohl<cr>', { desc = "Remove search highlights" }) -- remove search highlights
 -- comment
 -- vim.keymap.set('n', '<leader>/', '<Plug>(comment_toggle_linewise_current)') -- comment line
 -- vim.keymap.set('v', '<leader>/', '<Plug>(comment_toggle_linewise_visual)') -- comment line in visual mode
@@ -262,12 +262,12 @@ vim.keymap.set('n', '<C-k>', '<C-w>k')
 vim.keymap.set('n', '<C-h>', '<C-w>h')
 vim.keymap.set('n', '<C-l>', '<C-w>l')
 -- resize window
-vim.keymap.set('n', '<C-Up>', ':resize -2<CR>')
-vim.keymap.set('n', '<C-Down>', ':resize +2<CR>')
-vim.keymap.set('n', '<C-Left>', ':vertical resize -2<CR>')
-vim.keymap.set('n', '<C-Right>', ':vertical resize +2<CR>')
+vim.keymap.set('n', '<C-Up>', '<cmd>resize -2<CR>')
+vim.keymap.set('n', '<C-Down>', '<cmd>resize +2<CR>')
+vim.keymap.set('n', '<C-Left>', '<cmd>vertical resize -2<CR>')
+vim.keymap.set('n', '<C-Right>', '<cmd>vertical resize +2<CR>')
 -- NvimTree
-vim.keymap.set('n', '<leader>e', ':NvimTreeToggle<cr>', { desc = "Toggle NvimTree" })
+vim.keymap.set('n', '<leader>e', '<cmd>NvimTreeToggle<cr>', { desc = "Toggle NvimTree" })
 -- telescope
 require('telescope').setup({
   defaults = {
@@ -279,7 +279,7 @@ require('telescope').setup({
     }
   }
 })
-vim.keymap.set('n', '<leader>ff', require('telescope.builtin').find_files({ hidden = true }), { desc = "Find files" })
+vim.keymap.set('n', '<leader>ff', function() require('telescope.builtin').find_files({ hidden = true }) end, { desc = "Find files" })
 vim.keymap.set('n', '<leader>fg', require('telescope.builtin').live_grep, { desc = "Live grep" })
 vim.keymap.set('n', '<leader>fs', require('telescope.builtin').grep_string, { desc = "Grep string under the cursor or selection" })
 vim.keymap.set('n', '<leader>fc', require('telescope.builtin').current_buffer_fuzzy_find, { desc = "Fuzzy find in current buffer" })
@@ -287,7 +287,7 @@ vim.keymap.set('n', '<leader>fG', require('telescope.builtin').git_files, { desc
 vim.keymap.set('n', '<leader>fb', require('telescope.builtin').buffers, { desc = "Buffers" })
 vim.keymap.set('n', '<leader>fh', require('telescope.builtin').help_tags, { desc = "Help tags" })
 -- toggleterm
-vim.keymap.set('n', '<leader>tt', ':ToggleTerm direction=tab<cr>')
-vim.keymap.set('n', '<leader>tj', ':ToggleTerm direction=horizontal<cr>')
-vim.keymap.set('n', '<leader>tl', ':ToggleTerm direction=vertical<cr>')
-vim.keymap.set('n', '<leader>tk', ':ToggleTerm direction=float<cr>')
+vim.keymap.set('n', '<leader>tt', '<cmd>ToggleTerm direction=tab<cr>')
+vim.keymap.set('n', '<leader>tj', '<cmd>ToggleTerm direction=horizontal<cr>')
+vim.keymap.set('n', '<leader>tl', '<cmd>ToggleTerm direction=vertical<cr>')
+vim.keymap.set('n', '<leader>tk', '<cmd>ToggleTerm direction=float<cr>')
