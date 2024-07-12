@@ -212,8 +212,6 @@ vim.cmd.colorscheme("habamax")
 -- keymaps
 vim.keymap.set({ 'n', 'v' }, '<space>', '<nop>' )
 vim.keymap.set('i', 'jk', '<esc>')
-vim.keymap.set('t', 'J', 'j')
-vim.keymap.set('t', 'K', 'k')
 vim.keymap.set('n', 'J', '<nop>')
 vim.keymap.set('n', '<leader>q', '<cmd>q<cr>', { desc = "Quit" })
 vim.keymap.set('n', '<leader>Q', '<cmd>qa<cr>', { desc = "Quit all" })
@@ -225,9 +223,10 @@ vim.keymap.set({ 'n', 'v' }, '<C-r>', '<U>')
 
 -- terminal mode
 vim.keymap.set('t', 'jk', '<C-\\><C-n>') -- switch to normal mode 
+vim.keymap.set('t', '<esc>', '<C-\\><C-n><cmd>q<cr>', { desc = "Close terminal" })
 -- navigation in terminal mode
-vim.keymap.set('t', '<C-j>', '<up>')
-vim.keymap.set('t', '<C-k>', '<down>')
+vim.keymap.set('t', '<C-j>', '<down>')
+vim.keymap.set('t', '<C-k>', '<up>')
 vim.keymap.set('t', '<C-l>', '<nop>')
 vim.keymap.set('t', '<C-h>', '<nop>')
 
@@ -311,7 +310,6 @@ vim.keymap.set('n', '<leader>fG', require('telescope.builtin').git_files, { desc
 vim.keymap.set('n', '<leader>fb', require('telescope.builtin').buffers, { desc = "Buffers" })
 vim.keymap.set('n', '<leader>fh', require('telescope.builtin').help_tags, { desc = "Help tags" })
 -- toggleterm
-vim.keymap.set('t', '<esc>', '<C-\\><C-n><cmd>q<cr>', { desc = "Close toggle term" })
 vim.keymap.set('n', '<leader>tt', '<cmd>ToggleTerm direction=tab<cr>')
 vim.keymap.set('n', '<leader>tj', '<cmd>ToggleTerm direction=horizontal<cr>')
 vim.keymap.set('n', '<leader>tl', '<cmd>ToggleTerm direction=vertical<cr>')
