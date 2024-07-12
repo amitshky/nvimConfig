@@ -153,6 +153,27 @@ require('lazy').setup({
     end,
     event = "VimEnter",
   },
+
+  -- lazygit
+  {
+    "kdheepak/lazygit.nvim",
+    cmd = {
+      "LazyGit",
+      "LazyGitConfig",
+      "LazyGitCurrentFile",
+      "LazyGitFilter",
+      "LazyGitFilterCurrentFile",
+    },
+    -- optional for floating window border decoration
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
+    -- setting the keybinding for LazyGit with 'keys' is recommended in
+    -- order to load the plugin when the command is run for the first time
+    -- keys = {
+    --   { "<leader>lg", "<cmd>LazyGit<cr>", desc = "LazyGit" }
+    -- }
+  }
 })
 
 
@@ -191,6 +212,9 @@ vim.cmd.colorscheme("habamax")
 -- keymaps
 vim.keymap.set({ 'n', 'v' }, '<space>', '<nop>' )
 vim.keymap.set('i', 'jk', '<esc>')
+vim.keymap.set('t', 'J', 'j')
+vim.keymap.set('t', 'K', 'k')
+vim.keymap.set('n', 'J', '<nop>')
 vim.keymap.set('n', '<leader>q', '<cmd>q<cr>', { desc = "Quit" })
 vim.keymap.set('n', '<leader>Q', '<cmd>qa<cr>', { desc = "Quit all" })
 vim.keymap.set('n', '<leader>w', '<cmd>w<cr>', { desc = "Save" })
@@ -287,7 +311,10 @@ vim.keymap.set('n', '<leader>fG', require('telescope.builtin').git_files, { desc
 vim.keymap.set('n', '<leader>fb', require('telescope.builtin').buffers, { desc = "Buffers" })
 vim.keymap.set('n', '<leader>fh', require('telescope.builtin').help_tags, { desc = "Help tags" })
 -- toggleterm
+vim.keymap.set('t', '<esc>', '<C-\\><C-n><cmd>q<cr>', { desc = "Close toggle term" })
 vim.keymap.set('n', '<leader>tt', '<cmd>ToggleTerm direction=tab<cr>')
 vim.keymap.set('n', '<leader>tj', '<cmd>ToggleTerm direction=horizontal<cr>')
 vim.keymap.set('n', '<leader>tl', '<cmd>ToggleTerm direction=vertical<cr>')
 vim.keymap.set('n', '<leader>tk', '<cmd>ToggleTerm direction=float<cr>')
+-- lazygit
+vim.keymap.set('n', '<leader>g', '<cmd>LazyGit<cr>', { desc = "LazyGit" })
