@@ -66,6 +66,7 @@ require('lazy').setup({
     config = function() -- This is the function that runs, AFTER loading
       require('which-key').setup()
     end,
+    version = "2.1.0",
   },
 
   -- -- cmp
