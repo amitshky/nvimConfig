@@ -21,6 +21,9 @@ require('lazy').setup({
 
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
 
+  -- treesitter
+  { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
+
   -- NvimTree
   {
     "nvim-tree/nvim-tree.lua",
