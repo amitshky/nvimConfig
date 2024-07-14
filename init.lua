@@ -161,6 +161,8 @@ require('lazy').setup({
         mapping = cmp.mapping.preset.insert({
           ['<C-b>'] = cmp.mapping.scroll_docs(-4),
           ['<C-f>'] = cmp.mapping.scroll_docs(4),
+          ['<tab>'] = cmp.mapping.select_next_item(),
+          ['<S-tab>'] = cmp.mapping.select_prev_item(),
           ['<C-Space>'] = cmp.mapping.complete(),
           ['<C-e>'] = cmp.mapping.abort(),
           ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
@@ -168,6 +170,7 @@ require('lazy').setup({
         sources = cmp.config.sources({
           { name = 'nvim_lsp' },
           -- { name = 'luasnip' }, -- For luasnip users.
+          { name = 'path' },
         }, {
           { name = 'buffer' },
         })
