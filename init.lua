@@ -191,7 +191,7 @@ require('lazy').setup({
     config = function()
       vim.api.nvim_create_autocmd('LspAttach', {
         group = vim.api.nvim_create_augroup('lsp-attach', { clear=true }),
-        callback = function()
+        callback = function(event)
           vim.keymap.set('n', 'K', vim.lsp.buf.hover, { desc = "Go to definition" })
           vim.keymap.set('n', 'gd', require("telescope.builtin").lsp_definitions, { desc = "Go to definition" })
           vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { desc = "Go to declaration" })
