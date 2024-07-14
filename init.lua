@@ -189,6 +189,19 @@ require('lazy').setup({
       { 'folke/neodev.nvim', opts = {} },
     },
     config = function()
+      vim.api.nvim_create_autocmd('LspAttach', {
+        group = vim.api.nvim_create_augroup('lsp-attach', { clear=true }),
+        callback = function()
+          vim.keymap.set('n', 'K', vim.lsp.buf.hover, { desc = "Go to definition" })
+          vim.keymap.set('n', 'gd', require("telescope.builtin").lsp_definitions, { desc = "Go to definition" })
+          vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { desc = "Go to declaration" })
+          vim.keymap.set('n', 'gr', require("telescope.builtin").lsp_references, { desc = "Go to references" })
+          vim.keymap.set('n', 'gl', vim.diagnostic.open_float, { desc = "Open diagnostics popup" })
+          vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to prev diagnostics" })
+          vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next diagnostics" })
+        end,
+      })
+
       require("mason").setup()
       require("mason-lspconfig").setup({
         ensure_installed = { "lua_ls", "clangd" },
@@ -353,3 +366,5 @@ vim.keymap.set('n', '<leader>g', '<cmd>LazyGit<cr>', { desc = "LazyGit" })
 -- sessions
 vim.keymap.set('n', '<leader>ss', '<cmd>mksession! session.vim<cr>', { desc = "Save session" } )
 vim.keymap.set('n', '<leader>sl', '<cmd>source session.vim<cr>', { desc = "Load session" } )
+-- Lazy
+vim.keymap.set('n', '<leader>L', '<cmd>Lazy<cr>', { desc = "Lazy plugin manager" })
