@@ -39,8 +39,8 @@ require('lazy').setup({
         renderer = {
           icons = {
             show = {
-              file = false,
-              folder = false,
+              file = true,
+              folder = true,
               folder_arrow = true,
               git = false,
               modified = false,
@@ -178,7 +178,7 @@ require('lazy').setup({
     end,
   },
 
-  -- lsp
+  -- lsp configuration
   {
     "neovim/nvim-lspconfig",
     dependencies = {
@@ -299,6 +299,7 @@ require('which-key').register {
   ['<leader>f'] = { name = 'Telescope', _ = 'which_key_ignore' },
   ['<leader>\\'] = { name = 'Split window', _ = 'which_key_ignore' },
   ['<leader>t'] = { name = 'Toggle term', _ = 'which_key_ignore' },
+  ['<leader>s'] = { name = 'Session', _ = 'which_key_ignore' },
 }
 -- visual mode
 require('which-key').register({
