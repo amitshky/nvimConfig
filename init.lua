@@ -229,13 +229,14 @@ vim.o.termguicolors = true
 vim.o.list = true
 vim.o.listchars = "tab:→→,space:∙"
 vim.cmd([[autocmd BufEnter * set formatoptions-=r]]) -- disable auto comment in newline
-vim.o.foldmethod="manual"
-vim.o.foldenable=false
-vim.o.foldcolumn="1"
-vim.o.foldnestmax=4
-vim.o.splitbelow=true
-vim.o.splitright=true
-vim.o.signcolumn="yes:1"
+vim.o.foldmethod ="manual"
+vim.o.foldenable = false
+vim.o.foldcolumn = "1"
+vim.o.foldnestmax = 4
+vim.o.splitbelow = true
+vim.o.splitright = true
+vim.o.signcolumn = "yes:1"
+vim.o.pumheight = 6 -- height menus such as autocompletion menu
 
 -- colorscheme
 vim.cmd.colorscheme("gruvbox")
