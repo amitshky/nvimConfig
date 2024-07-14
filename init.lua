@@ -368,3 +368,5 @@ vim.keymap.set('n', '<leader>ss', '<cmd>mksession! session.vim<cr>', { desc = "S
 vim.keymap.set('n', '<leader>sl', '<cmd>source session.vim<cr>', { desc = "Load session" } )
 -- Lazy
 vim.keymap.set('n', '<leader>L', '<cmd>Lazy<cr>', { desc = "Lazy plugin manager" })
+-- Mason
+vim.keymap.set('n', '<leader>M', '<cmd>Mason<cr>', { desc = "Mason lsp plugin manager" })
