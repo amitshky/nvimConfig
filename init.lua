@@ -136,6 +136,46 @@ require('lazy').setup({
     },
   },
 
+  -- cmp (auto completion)
+  {
+    'hrsh7th/nvim-cmp',
+    dependencies = {
+      'hrsh7th/cmp-nvim-lsp',
+      'hrsh7th/cmp-path',
+      'L3MON4D3/LuaSnip',
+      'saadparwaiz1/cmp_luasnip',
+    },
+    config = function()
+      local cmp = require("cmp")
+      cmp.setup({
+        -- snippet = {
+        --   -- REQUIRED - you must specify a snippet engine
+        --   expand = function(args)
+        --     require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+        --   end,
+        -- },
+        window = {
+          completion = cmp.config.window.bordered(),
+          documentation = cmp.config.window.bordered(),
+        },
+        mapping = cmp.mapping.preset.insert({
+          ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+          ['<C-f>'] = cmp.mapping.scroll_docs(4),
+          ['<C-Space>'] = cmp.mapping.complete(),
+          ['<C-e>'] = cmp.mapping.abort(),
+          ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+        }),
+        sources = cmp.config.sources({
+          { name = 'nvim_lsp' },
+          -- { name = 'luasnip' }, -- For luasnip users.
+        }, {
+          { name = 'buffer' },
+        })
+      })
+    end,
+  },
+
+  -- lsp
   {
     "neovim/nvim-lspconfig",
     dependencies = {
@@ -150,8 +190,15 @@ require('lazy').setup({
       require("mason-lspconfig").setup({
         ensure_installed = { "lua_ls", "clangd" },
       })
-      require("lspconfig").lua_ls.setup({})
-      require("lspconfig").clangd.setup({})
+      -- Set up lspconfig.
+      local capabilities = require('cmp_nvim_lsp').default_capabilities()
+      local lspconfig = require("lspconfig")
+      lspconfig.lua_ls.setup({
+        capabilities = capabilities,
+      })
+      lspconfig.clangd.setup({
+        capabilities = capabilities,
+      })
     end,
   },
 })
@@ -181,6 +228,7 @@ vim.o.listchars = "tab:→→,space:∙"
 vim.cmd([[autocmd BufEnter * set formatoptions-=r]]) -- disable auto comment in newline
 vim.o.foldmethod="manual"
 vim.o.foldenable=false
+vim.o.foldcolumn="1"
 vim.o.foldnestmax=4
 vim.o.splitbelow=true
 vim.o.splitright=true
@@ -297,3 +345,6 @@ vim.keymap.set('n', '<leader>tl', '<cmd>ToggleTerm direction=vertical<cr>')
 vim.keymap.set('n', '<leader>tk', '<cmd>ToggleTerm direction=float<cr>')
 -- lazygit
 vim.keymap.set('n', '<leader>g', '<cmd>LazyGit<cr>', { desc = "LazyGit" })
+-- sessions
+vim.keymap.set('n', '<leader>ss', '<cmd>mksession! session.vim<cr>', { desc = "Save session" } )
+vim.keymap.set('n', '<leader>sl', '<cmd>source session.vim<cr>', { desc = "Load session" } )
