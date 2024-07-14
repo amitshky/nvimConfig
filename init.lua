@@ -22,7 +22,17 @@ require('lazy').setup({
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
 
   -- colorschemes
-  { "ellisonleao/gruvbox.nvim", priority = 1000 , config = true, opts ={} },
+  {
+    "ellisonleao/gruvbox.nvim",
+    priority = 1000,
+    config = function()
+      require("gruvbox").setup({
+        palette_overrides = {
+          dark0 = "#1f1f1f",
+        },
+      })
+    end,
+  },
 
   -- treesitter
   { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
