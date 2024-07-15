@@ -296,6 +296,7 @@ vim.keymap.set({ 'n', 'v' }, '<C-r>', '<U>')
 -- terminal mode
 vim.keymap.set('t', 'jk', '<C-\\><C-n>') -- switch to normal mode 
 vim.keymap.set('t', '<esc>', '<C-\\><C-n><cmd>q<cr>', { desc = "Close terminal" })
+vim.keymap.set('t', '<C-e>', '<esc>') -- <esc> useful in lazygit
 -- navigation in terminal mode
 vim.keymap.set('t', '<C-j>', '<down>')
 vim.keymap.set('t', '<C-k>', '<up>')
