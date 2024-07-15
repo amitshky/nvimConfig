@@ -28,7 +28,7 @@ require('lazy').setup({
     config = function()
       require("gruvbox").setup({
         palette_overrides = {
-          dark0 = "#1f1f1f",
+          dark0 = "#1b1b1b",
         },
       })
     end,
@@ -214,7 +214,10 @@ require('lazy').setup({
 
       require("mason").setup()
       require("mason-lspconfig").setup({
-        ensure_installed = { "lua_ls", "clangd" },
+        ensure_installed = { 
+          "lua_ls",
+          "clangd",
+        },
       })
       -- Set up lspconfig.
       local capabilities = require('cmp_nvim_lsp').default_capabilities()
@@ -223,6 +226,9 @@ require('lazy').setup({
         capabilities = capabilities,
       })
       lspconfig.clangd.setup({
+        capabilities = capabilities,
+      })
+      lspconfig.gdscript.setup({
         capabilities = capabilities,
       })
     end,
@@ -254,7 +260,7 @@ vim.o.listchars = "tab:→→,space:∙"
 vim.cmd([[autocmd BufEnter * set formatoptions-=r]]) -- disable auto comment in newline
 vim.o.foldmethod ="manual"
 vim.o.foldenable = false
-vim.o.foldcolumn = "1"
+-- vim.o.foldcolumn = "1"
 vim.o.foldnestmax = 4
 vim.o.splitbelow = true
 vim.o.splitright = true
