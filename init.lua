@@ -212,13 +212,13 @@ require('lazy').setup({
       vim.api.nvim_create_autocmd('LspAttach', {
         group = vim.api.nvim_create_augroup('lsp-attach', { clear=true }),
         callback = function(event)
-          vim.keymap.set('n', 'K', vim.lsp.buf.hover, { desc = "Go to definition" })
-          vim.keymap.set('n', 'gd', require("telescope.builtin").lsp_definitions, { desc = "Go to definition" })
-          vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { desc = "Go to declaration" })
-          vim.keymap.set('n', 'gr', require("telescope.builtin").lsp_references, { desc = "Go to references" })
-          vim.keymap.set('n', 'gl', vim.diagnostic.open_float, { desc = "Open diagnostics popup" })
-          vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to prev diagnostics" })
-          vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next diagnostics" })
+          vim.keymap.set('n', 'K', vim.lsp.buf.hover, { desc = "Go to definition", buffer = event.buf })
+          vim.keymap.set('n', 'gd', require("telescope.builtin").lsp_definitions, { desc = "Go to definition", buffer = event.buf })
+          vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { desc = "Go to declaration", buffer = event.buf })
+          vim.keymap.set('n', 'gr', require("telescope.builtin").lsp_references, { desc = "Go to references", buffer = event.buf })
+          vim.keymap.set('n', 'gl', vim.diagnostic.open_float, { desc = "Open diagnostics popup", buffer = event.buf })
+          vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to prev diagnostics", buffer = event.buf })
+          vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next diagnostics", buffer = event.buf })
         end,
       })
 
@@ -340,6 +340,7 @@ require('which-key').register {
   ['<leader>\\'] = { name = 'Split window', _ = 'which_key_ignore' },
   ['<leader>t'] = { name = 'Toggle term', _ = 'which_key_ignore' },
   ['<leader>s'] = { name = 'Session', _ = 'which_key_ignore' },
+  ['<leader>l'] = { name = 'LSP', _ = 'which_key_ignore' },
 }
 -- visual mode
 require('which-key').register({
@@ -396,3 +397,5 @@ vim.keymap.set('n', '<leader>sl', '<cmd>source session.vim<cr>', { desc = "Load 
 vim.keymap.set('n', '<leader>L', '<cmd>Lazy<cr>', { desc = "Lazy plugin manager" })
 -- Mason
 vim.keymap.set('n', '<leader>M', '<cmd>Mason<cr>', { desc = "Mason lsp plugin manager" })
+-- lsp
+vim.keymap.set('n', '<leader>lR', '<cmd>LspRestart<cr>', { desc = "Restart LSP" })
