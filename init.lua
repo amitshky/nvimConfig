@@ -93,7 +93,17 @@ require('lazy').setup({
   },
 
   -- lines in indentations
-  { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    main = "ibl",
+    config = function()
+      require("ibl").setup({
+        indent = {
+          tab_char = "▎",
+        },
+      })
+    end,
+  },
 
   -- "gc" to comment visual regions/lines
   { 'numToStr/Comment.nvim', opts = {} },
@@ -214,7 +224,7 @@ require('lazy').setup({
 
       require("mason").setup()
       require("mason-lspconfig").setup({
-        ensure_installed = { 
+        ensure_installed = {
           "lua_ls",
           "clangd",
         },
