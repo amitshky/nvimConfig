@@ -284,6 +284,7 @@ vim.cmd.colorscheme("gruvbox")
 -- keymaps
 vim.keymap.set({ 'n', 'v' }, '<space>', '<nop>' )
 vim.keymap.set('i', 'jk', '<esc>')
+vim.keymap.set('c', 'jk', '<esc>')
 vim.keymap.set('n', 'J', '<nop>')
 vim.keymap.set('n', '<leader>q', '<cmd>q<cr>', { desc = "Quit" })
 vim.keymap.set('n', '<leader>Q', '<cmd>qa<cr>', { desc = "Quit all" })
