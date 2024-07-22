@@ -241,6 +241,9 @@ require('lazy').setup({
       lspconfig.gdscript.setup({
         capabilities = capabilities,
       })
+      lspconfig.bashls.setup({
+        capabilities = capabilities,
+      })
     end,
   },
 })
@@ -274,8 +277,14 @@ vim.o.foldenable = false
 vim.o.foldnestmax = 4
 vim.o.splitbelow = true
 vim.o.splitright = true
-vim.o.signcolumn = "yes:1"
 vim.o.pumheight = 6 -- height menus such as autocompletion menu
+vim.o.path = vim.o.path .. "**"
+vim.o.signcolumn = "no" -- show/hide a column for error, warning signs; "no", "yes", "yes:<width>" eg: "yes:1"
+
+-- other options
+vim.diagnostic.config({
+  virtual_text = false, -- turn off inline error messages
+})
 
 -- colorscheme
 vim.cmd.colorscheme("gruvbox")
