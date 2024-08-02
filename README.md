@@ -1,5 +1,6 @@
 # nvimConfig
 Neovim config file
+location: `~/.config/nvim/`
 
 NOTE: the `kickstart.lua` file is from [kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim/blob/master/init.lua).
 
