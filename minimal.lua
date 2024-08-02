@@ -15,9 +15,12 @@ vim.opt.rtp:prepend(lazypath)
 -- [[ Configure and install plugins ]]
 require('lazy').setup({
   -- automatically check for plugin updates
-  checker = { enabled = true },
+  checker = { enabled = false },
 
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
+
+  -- "gc" to comment visual regions/lines
+  { 'numToStr/Comment.nvim', opts = {} },
 
   -- which key
   { -- Useful plugin to show you pending keybinds.
@@ -35,6 +38,22 @@ require('lazy').setup({
     config = function()
       require('toggleterm').setup()
     end,
+  },
+
+  -- lazygit
+  {
+    "kdheepak/lazygit.nvim",
+    cmd = {
+      "LazyGit",
+      "LazyGitConfig",
+      "LazyGitCurrentFile",
+      "LazyGitFilter",
+      "LazyGitFilterCurrentFile",
+    },
+    -- optional for floating window border decoration
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
   },
 })
 
@@ -192,6 +211,18 @@ vim.keymap.set('n', '<M-h>', '<cmd>tabprevious<cr>')
 vim.keymap.set('n', '<M-l>', '<cmd>tabNext<cr>')
 
 -- leader key keymaps
+-- which key register
+-- Document existing key chains
+require('which-key').register {
+  ['<leader>\\'] = { name = 'Split window', _ = 'which_key_ignore' },
+  ['<leader>t'] = { name = 'Toggle term', _ = 'which_key_ignore' },
+  ['<leader>s'] = { name = 'Session', _ = 'which_key_ignore' },
+}
+-- visual mode
+require('which-key').register({
+  -- ['<leader>h'] = { 'Git [H]unk' },
+}, { mode = 'v' })
+
 vim.keymap.set('n', '<leader>h', '<cmd>nohl<cr>', { desc = "Remove search highlights" }) -- remove search highlights
 -- split window
 vim.keymap.set('n', '<leader>\\\\', '<C-w>v', { desc = "Vertically" }) -- split vertically
@@ -205,3 +236,13 @@ vim.keymap.set('n', '<C-Up>', '<cmd>resize -2<CR>')
 vim.keymap.set('n', '<C-Down>', '<cmd>resize +2<CR>')
 vim.keymap.set('n', '<C-Left>', '<cmd>vertical resize -2<CR>')
 vim.keymap.set('n', '<C-Right>', '<cmd>vertical resize +2<CR>')
+-- sessions
+vim.keymap.set('n', '<leader>ss', '<cmd>mksession! session.vim<cr>', { desc = "Save session" } )
+vim.keymap.set('n', '<leader>sl', '<cmd>source session.vim<cr>', { desc = "Load session" } )
+-- toggleterm
+vim.keymap.set('n', '<leader>tt', '<cmd>ToggleTerm direction=tab<cr>')
+vim.keymap.set('n', '<leader>tj', '<cmd>ToggleTerm direction=horizontal<cr>')
+vim.keymap.set('n', '<leader>tl', '<cmd>ToggleTerm direction=vertical<cr>')
+vim.keymap.set('n', '<leader>tk', '<cmd>ToggleTerm direction=float<cr>')
+-- lazygit
+vim.keymap.set('n', '<leader>g', '<cmd>LazyGit<cr>', { desc = "LazyGit" })
