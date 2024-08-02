@@ -18,6 +18,24 @@ require('lazy').setup({
   checker = { enabled = true },
 
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
+
+  -- which key
+  { -- Useful plugin to show you pending keybinds.
+    'folke/which-key.nvim',
+    event = 'VimEnter', -- Sets the loading event to 'VimEnter'
+    config = function() -- This is the function that runs, AFTER loading
+      require('which-key').setup()
+    end,
+    version = "2.1.0",
+  },
+
+  -- Terminal
+  {
+    'akinsho/toggleterm.nvim',
+    config = function()
+      require('toggleterm').setup()
+    end,
+  },
 })
 
 -- options
