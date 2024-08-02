@@ -244,6 +244,9 @@ require('lazy').setup({
       lspconfig.bashls.setup({
         capabilities = capabilities,
       })
+      lspconfig.cmake.setup({
+        capabilities = capabilities,
+      })
     end,
   },
 })
