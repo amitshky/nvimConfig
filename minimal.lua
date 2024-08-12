@@ -183,6 +183,7 @@ vim.keymap.set('t', '<C-h>', '<left>')
 -- prevents the delete operation to pollute the unnamed buffer
 vim.keymap.set('n', 'dd', '"add')
 vim.keymap.set({ 'n', 'v', 'x' }, 'd', '"_d')
+vim.keymap.set('v', 'p', 'P') -- to not yank the text when pasting on selection
 
 -- for word wrap
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
