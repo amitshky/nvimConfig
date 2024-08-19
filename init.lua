@@ -427,3 +427,4 @@ vim.keymap.set('n', '<leader>lR', '<cmd>LspRestart<cr>', { desc = "Restart LSP" 
 vim.keymap.set('n', '<leader>lr', vim.lsp.buf.rename, { desc = "Rename symbol" })
 vim.keymap.set('n', '<leader>ls', '<cmd>Telescope lsp_document_symbols<cr>', { desc = "Document symbols" })
 vim.keymap.set('n', '<leader>lS', '<cmd>Telescope lsp_dynamic_workspace_symbols<cr>', { desc = "Workspace symbols" })
+vim.keymap.set('n', '<leader>lo', '<cmd>ClangdSwitchSourceHeader<cr>', { desc = "Switch source and header (C++)" })
