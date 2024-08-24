@@ -74,11 +74,7 @@ require('lazy').setup({
     "nvim-telescope/telescope.nvim",
     branch = "0.1.x",
     config = function()
-      require("telescope").setup({
-        defaults = {
-          path_display = "truncate",
-        },
-      })
+      require("telescope").setup({})
     end,
     dependencies = { "telescope-fzf-native.nvim" },
     lazy = true,
@@ -438,8 +434,8 @@ vim.keymap.set('n', '<leader>M', '<cmd>Mason<cr>', { desc = "Mason lsp plugin ma
 -- lsp
 vim.keymap.set('n', '<leader>lR', '<cmd>LspRestart<cr>', { desc = "Restart LSP" })
 vim.keymap.set('n', '<leader>lr', vim.lsp.buf.rename, { desc = "Rename symbol" })
-vim.keymap.set('n', '<leader>ls', '<cmd>Telescope lsp_document_symbols<cr>', { desc = "Document symbols" })
-vim.keymap.set('n', '<leader>lS', '<cmd>Telescope lsp_dynamic_workspace_symbols<cr>', { desc = "Workspace symbols" })
+vim.keymap.set('n', '<leader>ls', '<cmd>Telescope lsp_document_symbols symbol_width=50<cr>', { desc = "Document symbols" })
+vim.keymap.set('n', '<leader>lS', '<cmd>Telescope lsp_dynamic_workspace_symbols symbol_width=50<cr>', { desc = "Workspace symbols" })
 vim.keymap.set('n', '<leader>lo', '<cmd>ClangdSwitchSourceHeader<cr>', { desc = "Switch source and header (C++)" })
 -- trouble
 vim.keymap.set('n', '<leader>xx', '<cmd>Trouble diagnostics toggle<cr>', { desc = "Diagnostics (Trouble)" })
