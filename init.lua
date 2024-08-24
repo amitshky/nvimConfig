@@ -74,7 +74,11 @@ require('lazy').setup({
     "nvim-telescope/telescope.nvim",
     branch = "0.1.x",
     config = function()
-      require("telescope").setup({})
+      require("telescope").setup({
+        defaults = {
+          path_display = "truncate",
+        },
+      })
     end,
     dependencies = { "telescope-fzf-native.nvim" },
     lazy = true,
@@ -208,6 +212,13 @@ require('lazy').setup({
         })
       })
     end,
+  },
+
+  -- trouble (shows diagnostics)
+  {
+    "folke/trouble.nvim",
+    opts = {}, -- for default options, refer to the configuration section for custom setup.
+    cmd = "Trouble",
   },
 
   -- lsp configuration
@@ -367,6 +378,7 @@ require('which-key').register {
   ['<leader>t'] = { name = 'Toggle term', _ = 'which_key_ignore' },
   ['<leader>s'] = { name = 'Session', _ = 'which_key_ignore' },
   ['<leader>l'] = { name = 'LSP', _ = 'which_key_ignore' },
+  ['<leader>x'] = { name = 'Trouble', _ = 'which_key_ignore' },
 }
 -- visual mode
 require('which-key').register({
@@ -429,3 +441,10 @@ vim.keymap.set('n', '<leader>lr', vim.lsp.buf.rename, { desc = "Rename symbol" }
 vim.keymap.set('n', '<leader>ls', '<cmd>Telescope lsp_document_symbols<cr>', { desc = "Document symbols" })
 vim.keymap.set('n', '<leader>lS', '<cmd>Telescope lsp_dynamic_workspace_symbols<cr>', { desc = "Workspace symbols" })
 vim.keymap.set('n', '<leader>lo', '<cmd>ClangdSwitchSourceHeader<cr>', { desc = "Switch source and header (C++)" })
+-- trouble
+vim.keymap.set('n', '<leader>xx', '<cmd>Trouble diagnostics toggle<cr>', { desc = "Diagnostics (Trouble)" })
+vim.keymap.set('n', '<leader>xX', '<cmd>Trouble diagnostics toggle filter.buf=0<cr>', { desc = "Buffer Diagnostics (Trouble)" })
+vim.keymap.set('n', '<leader>xs', '<cmd>Trouble symbols toggle focus=false<cr>', { desc = "Symbols (Trouble)" })
+vim.keymap.set('n', '<leader>xl', '<cmd>Trouble lsp toggle focus=false win.position=right<cr>', { desc = "LSP Definitions / references / ... (Trouble)" })
+vim.keymap.set('n', '<leader>xL', '<cmd>Trouble loclist toggle<cr>', { desc = "Location List (Trouble)" })
+vim.keymap.set('n', '<leader>xQ', '<cmd>Trouble qflist toggle<cr>', { desc = "Quickfix List (Trouble)" })
