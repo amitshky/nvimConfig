@@ -266,6 +266,9 @@ require('lazy').setup({
       lspconfig.cmake.setup({
         capabilities = capabilities,
       })
+      lspconfig.pylsp.setup({
+        capabilities = capabilities,
+      })
     end,
   },
 })
