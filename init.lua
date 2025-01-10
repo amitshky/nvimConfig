@@ -306,6 +306,8 @@ vim.o.splitright = true
 vim.o.pumheight = 6 -- height menus such as autocompletion menu
 vim.o.path = vim.o.path .. "**"
 vim.o.signcolumn = "no" -- show/hide a column for error, warning signs; "no", "yes", "yes:<width>" eg: "yes:1"
+-- customizing statuscolumn to display negative values for line numbers above the current line in relative numbering
+vim.o.statuscolumn = '%s %{v:lnum<line(".") ? "-" : v:lnum==line(".") ? "": " "}%{v:lnum==line(".") ? v:lnum : v:relnum} '
 
 -- other options
 vim.diagnostic.config({
