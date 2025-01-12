@@ -351,6 +351,7 @@ vim.keymap.set('n', '<leader>Q', '<cmd>qa<cr>', { desc = "Quit all" })
 vim.keymap.set('n', '<leader>w', '<cmd>w<cr>', { desc = "Save" })
 vim.keymap.set('n', '<leader>W', '<cmd>wa<cr>', { desc = "Save all" })
 vim.keymap.set('i', '<C-h>', '<C-w>')
+vim.keymap.set('i', '<C-BS>', '<C-w>') -- works for some terminals (eg: `foot`)
 vim.keymap.set({ 'n', 'v' }, 'U', '<C-r>')
 vim.keymap.set({ 'n', 'v' }, '<C-r>', '<U>')
 
